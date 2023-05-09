@@ -133,6 +133,98 @@ class Player:
         pyxel.blt(self.x, self.y, 0, u, 16, w, 8, TRANSPARENT_COLOR)
 
 
+class Enemy1:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.dx = 0
+        self.dy = 0
+        self.direction = -1
+        self.is_alive = True
+
+    def update(self):
+        self.dx = self.direction
+        self.dy = min(self.dy + 1, 3)
+        if self.direction < 0 and is_wall(self.x - 1, self.y + 4):
+            self.direction = 1
+        elif self.direction > 0 and is_wall(self.x + 8, self.y + 4):
+            self.direction = -1
+        self.x, self.y, self.dx, self.dy = push_back(self.x, self.y, self.dx, self.dy)
+
+    def draw(self):
+        u = pyxel.frame_count // 4 % 2 * 8
+        w = 8 if self.direction > 0 else -8
+        pyxel.blt(self.x, self.y, 0, u, 24, w, 8, TRANSPARENT_COLOR)
+
+
+class Enemy2:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.dx = 0
+        self.dy = 0
+        self.direction = 1
+        self.is_alive = True
+
+    def update(self):
+        self.dx = self.direction
+        self.dy = min(self.dy + 1, 3)
+        if is_wall(self.x, self.y + 8) or is_wall(self.x + 7, self.y + 8):
+            if self.direction < 0 and (
+                is_wall(self.x - 1, self.y + 4) or not is_wall(self.x - 1, self.y + 8)
+            ):
+                self.direction = 1
+            elif self.direction > 0 and (
+                is_wall(self.x + 8, self.y + 4) or not is_wall(self.x + 7, self.y + 8)
+            ):
+                self.direction = -1
+        self.x, self.y, self.dx, self.dy = push_back(self.x, self.y, self.dx, self.dy)
+
+    def draw(self):
+        u = pyxel.frame_count // 4 % 2 * 8 + 16
+        w = 8 if self.direction > 0 else -8
+        pyxel.blt(self.x, self.y, 0, u, 24, w, 8, TRANSPARENT_COLOR)
+
+
+class Enemy3:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.time_to_fire = 0
+        self.is_alive = True
+
+    def update(self):
+        self.time_to_fire -= 1
+        if self.time_to_fire <= 0:
+            dx = player.x - self.x
+            dy = player.y - self.y
+            sq_dist = dx * dx + dy * dy
+            if sq_dist < 60**2:
+                dist = pyxel.sqrt(sq_dist)
+                enemies.append(Enemy3Bullet(self.x, self.y, dx / dist, dy / dist))
+                self.time_to_fire = 60
+
+    def draw(self):
+        u = pyxel.frame_count // 8 % 2 * 8
+        pyxel.blt(self.x, self.y, 0, u, 32, 8, 8, TRANSPARENT_COLOR)
+
+
+class Enemy3Bullet:
+    def __init__(self, x, y, dx, dy):
+        self.x = x
+        self.y = y
+        self.dx = dx
+        self.dy = dy
+        self.is_alive = True
+
+    def update(self):
+        self.x += self.dx
+        self.y += self.dy
+
+    def draw(self):
+        u = pyxel.frame_count // 2 % 2 * 8 + 16
+        pyxel.blt(self.x, self.y, 0, u, 32, 8, 8, TRANSPARENT_COLOR)
+
 
 class App:
     def __init__(self):
