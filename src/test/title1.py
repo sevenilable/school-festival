@@ -202,7 +202,7 @@ class Enemy3:
             if sq_dist < 60**2:
                 dist = pyxel.sqrt(sq_dist)
                 enemies.append(Enemy3Bullet(self.x, self.y, dx / dist, dy / dist))
-                self.time_to_fire = 1
+                self.time_to_fire = 60
 
     def draw(self):
         u = pyxel.frame_count // 8 % 2 * 8
@@ -229,7 +229,7 @@ class Enemy3Bullet:
 class App:
     def __init__(self):
         pyxel.init(128, 128, title="Pyxel Platformer")
-        pyxel.load("platformer (2).pyxres")
+        pyxel.load("platformer (2) (1).pyxres")
 
         # Change enemy spawn tiles invisible
         pyxel.image(0).rect(0, 8, 24, 8, TRANSPARENT_COLOR)
