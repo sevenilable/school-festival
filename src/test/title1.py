@@ -193,37 +193,13 @@ class Enemy3:
         self.time_to_fire = 0
         self.is_alive = True
 
-    def update(self):
-        self.time_to_fire -= 1
-        if self.time_to_fire <= 0:
-            dx = player.x - self.x
-            dy = player.y - self.y
-            sq_dist = dx * dx + dy * dy
-            if sq_dist < 60**2:
-                dist = pyxel.sqrt(sq_dist)
-                enemies.append(Enemy3Bullet(self.x, self.y, dx / dist, dy / dist))
-                self.time_to_fire = 60
 
     def draw(self):
         u = pyxel.frame_count // 8 % 2 * 8
         pyxel.blt(self.x, self.y, 0, u, 32, 8, 8, TRANSPARENT_COLOR)
 
 
-class Enemy3Bullet:
-    def __init__(self, x, y, dx, dy):
-        self.x = x
-        self.y = y
-        self.dx = dx
-        self.dy = dy
-        self.is_alive = True
 
-    def update(self):
-        self.x += self.dx
-        self.y += self.dy
-
-    def draw(self):
-        u = pyxel.frame_count // 2 % 2 * 8 + 16
-        pyxel.blt(self.x, self.y, 0, u, 32, 8, 8, TRANSPARENT_COLOR)
 
 
 class App:
