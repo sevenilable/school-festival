@@ -190,9 +190,11 @@ class Enemy3:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        
-
     
+        self.is_alive = True
+
+   
+        
 
     def draw(self):
         u = pyxel.frame_count // 8 % 2 * 8
