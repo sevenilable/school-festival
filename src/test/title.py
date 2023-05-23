@@ -190,11 +190,19 @@ class Enemy3:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-    
+        self.time_to_fire = 0
         self.is_alive = True
 
-   
-        
+    def update(self):
+        self.time_to_fire -= 1
+        if self.time_to_fire <= 0:
+            dx = player.x - self.x
+            dy = player.y - self.y
+            sq_dist = dx * dx + dy * dy
+            if sq_dist < 60**2:
+                dist = pyxel.sqrt(sq_dist)
+                enemies.append(Enemy3Bullet(self.x, self.y, dx / dist, dy / dist))
+                self.time_to_fire = 60
 
     def draw(self):
         u = pyxel.frame_count // 8 % 2 * 8
