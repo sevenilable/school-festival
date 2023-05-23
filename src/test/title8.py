@@ -190,8 +190,7 @@ class Enemy3:
     def __init__(self, x, y):
         self.x = x
         self.y = y
-        self.time_to_fire = 0
-        self.is_alive = True
+        
 
     
 
