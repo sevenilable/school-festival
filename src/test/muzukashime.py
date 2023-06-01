@@ -269,7 +269,7 @@ class App:
             enemy.draw()
         
         
-        s = f"SCORE {self.score:>4}
+        s = f"SCORE {self.score:>4}"
         pyxel.text(5+scroll_x, 4, s,1)
         pyxel.text(4+scroll_x, 4, s,7)
 
