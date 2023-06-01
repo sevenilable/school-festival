@@ -230,6 +230,7 @@ class App:
     def __init__(self):
         pyxel.init(128, 128, title="Pyxel Platformer")
         pyxel.load("joukyuu.pyxres")
+        self.score = 0
 
         # Change enemy spawn tiles invisible
         pyxel.image(0).rect(0, 8, 24, 8, TRANSPARENT_COLOR)
@@ -245,6 +246,7 @@ class App:
             pyxel.quit()
 
         player.update()
+        self.score = scroll_x
         for enemy in enemies:
             if abs(player.x - enemy.x) < 6 and abs(player.y - enemy.y) < 6:
                 game_over()
