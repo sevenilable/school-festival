@@ -263,6 +263,7 @@ class App:
         
         player.update()
         self.score = scroll_x
+        self.score2 = self.score
         if self.highscore <= self.score:
             self.highscore = self.score
         for enemy in enemies:
@@ -336,7 +337,7 @@ class App:
         while i < len(self.ranking):
             if self.ranking[i] < self.score2:
                 self.ranking.insurt(i,self.score2)
-                self.score = 0
+                self.score2 = 0
                 break
             i = i + 1
         pyxel.text(35+scroll_x,40,"GAME OVER",7)
