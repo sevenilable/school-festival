@@ -336,7 +336,7 @@ class App:
         i = 0
         while i < len(self.ranking):
             if self.ranking[i] < self.score2:
-                self.ranking.insurt(i,self.score2)
+                self.ranking.insert(i,self.score2)
                 self.score2 = 0
                 break
             i = i + 1
