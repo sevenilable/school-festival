@@ -233,7 +233,7 @@ class App:
     def __init__(self):
         pyxel.init(128, 128, title="Pyxel Platformer")
         pyxel.load("joukyuu.pyxres")
-        self.scene = SCENE_TITLE
+        self.scene = SCENE_PLAY
         self.score = 0
 
         # Change enemy spawn tiles invisible
@@ -284,7 +284,7 @@ class App:
             enemies = []
             spawn_enemy(0, 127)
             pyxel.play(3, 9)
-            self.scene = SCENE_TITLE
+            self.scene = SCENE_PLAY
 
     def draw(self):
         pyxel.cls(0)
