@@ -7,6 +7,9 @@ TILE_SPAWN1 = (0, 1)
 TILE_SPAWN2 = (1, 1)
 TILE_SPAWN3 = (2, 1)
 WALL_TILE_X = 4
+SCENE_TITLE = 0
+SCENE_PLAY = 1
+SCENE_GAMEOVER = 2
 
 scroll_x = 0
 player = None
@@ -230,6 +233,7 @@ class App:
     def __init__(self):
         pyxel.init(128, 128, title="Pyxel Platformer")
         pyxel.load("joukyuu.pyxres")
+        self.scene = SCENE_TITLE
         self.score = 0
 
         # Change enemy spawn tiles invisible
@@ -244,21 +248,64 @@ class App:
     def update(self):
         if pyxel.btn(pyxel.KEY_Q):
             pyxel.quit()
+            
+        if self.scene == SCENE_TITLE:
+            self.update_title_scene()
+        elif self.scene == SCENE_PLAY:
+            self.update_play_scene()
+        elif self.scene == SCENE_GAMEOVER:
+            self.update_gameover_scene()
 
-        player.update()
+    def update_play_scene(self):
         self.score = scroll_x
         for enemy in enemies:
             if abs(player.x - enemy.x) < 6 and abs(player.y - enemy.y) < 6:
-                game_over()
+                self.scene = SCENE_GAMEOVER
                 return
             enemy.update()
             if enemy.x < scroll_x - 8 or enemy.x > scroll_x + 160 or enemy.y > 160:
                 enemy.is_alive = False
         cleanup_list(enemies)
+        
+    def update_title_scene(self):
+        self.scene = SCENE_PLAY
+        
+
+    def update_gameover_scene(self):
+        if pyxel.btnp(pyxel.KEY_RETURN):
+            
+            global scroll_x, enemies
+            scroll_x = 0
+            player.x = 0
+            player.y = 0
+            player.dx = 0
+            player.dy = 0
+            enemies = []
+            spawn_enemy(0, 127)
+            pyxel.play(3, 9)
+            self.scene = SCENE_TITLE
 
     def draw(self):
         pyxel.cls(0)
-
+        
+        
+       if self.scene == SCENE_TITLE:
+        self.draw_title_sene()
+       elif self.scene == SCENE_PLAY:
+        self.draw_play_scene()
+       elif self.scene == SCENE_GAMEOVER:
+        self.draw_gameover_scene()
+        
+        
+        
+        s = f"SCORE{self.score:>4}/1920"
+        pyxel.text(5+scrool_x,4,s,1)
+        pyxel.text(4+scrool_x,4,s,7)
+        
+        
+       
+   def draw_play_scene(self):
+    
         # Draw level
         pyxel.camera()
         pyxel.bltm(0, 0, 0, (scroll_x // 4) % 128, 128, 128, 128)
@@ -269,12 +316,11 @@ class App:
         player.draw()
         for enemy in enemies:
             enemy.draw()
-        
-        
-        s = f"SCORE {self.score:>4}"
-        pyxel.text(5+scroll_x, 4, s,1)
-        pyxel.text(4+scroll_x, 4, s,7)
-
+            
+  def draw_gameover_scene(self):
+    pyxel.text(35+scrool_x,40,"GAME OVER",7)
+    pyxel.text(30+scrool_x,80,"- PRESS ENTER -",7)
+       
 
 def game_over():
     global scroll_x, enemies
