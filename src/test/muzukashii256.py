@@ -289,12 +289,12 @@ class App:
         pyxel.cls(0)
         
         
-       if self.scene == SCENE_TITLE:
-        self.draw_title_sene()
-       elif self.scene == SCENE_PLAY:
-        self.draw_play_scene()
-       elif self.scene == SCENE_GAMEOVER:
-        self.draw_gameover_scene()
+        if self.scene == SCENE_TITLE:
+           self.draw_title_sene()
+        elif self.scene == SCENE_PLAY:
+           self.draw_play_scene()
+        elif self.scene == SCENE_GAMEOVER:
+           self.draw_gameover_scene()
         
         
         
