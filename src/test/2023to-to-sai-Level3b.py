@@ -233,7 +233,7 @@ class App:
     def __init__(self):
         pyxel.init(128, 128, title="Pyxel Platformer")
         pyxel.load("platform (1) (1) (1) (1) (1) (1).pyxres")
-        self.scene = SCENE_TITLE
+        self.scene = SCENE_PLAY
         self.score = 0
         self.score2 = 0
         self.highscore = 0
@@ -276,7 +276,7 @@ class App:
         cleanup_list(enemies)
         
     def update_title_scene(self):
-            self.scene = SCENE_TITLE
+            self.scene = SCENE_PLAY
         
 
     def update_gameover_scene(self):
