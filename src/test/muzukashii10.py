@@ -232,7 +232,7 @@ class Enemy3Bullet:
 class App:
     def __init__(self):
         pyxel.init(128, 128, title="Pyxel Platformer")
-        pyxel.load("joukyuu.pyxres")
+        pyxel.load("platform (1) (1) (1) (1) (1) (1).pyxres")
         self.scene = SCENE_PLAY
         self.score = 0
         self.highscore = 0
