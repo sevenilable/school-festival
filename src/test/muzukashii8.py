@@ -300,8 +300,8 @@ class App:
         
         
         s = f"SCORE{self.score:>4}/1920"
-        pyxel.text(5+scrool_x,4,s,1)
-        pyxel.text(4+scrool_x,4,s,7)
+        pyxel.text(5+scroll_x,4,s,1)
+        pyxel.text(4+scroll_x,4,s,7)
         
         
        
@@ -324,8 +324,8 @@ class App:
         
         
     def draw_gameover_scene(self):
-        pyxel.text(35+scrool_x,40,"GAME OVER",7)
-        pyxel.text(30+scrool_x,80,"- PRESS ENTER -",7)
+        pyxel.text(35+scroll_x,40,"GAME OVER",7)
+        pyxel.text(30+scroll_x,80,"- PRESS ENTER -",7)
        
 
 def game_over():
