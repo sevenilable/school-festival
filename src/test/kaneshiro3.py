@@ -127,8 +127,7 @@ class Player:
             last_scroll_x = scroll_x
             scroll_x = min(self.x - SCROLL_BORDER_X, 240 * 8)
             spawn_enemy(last_scroll_x + 128, scroll_x + 127)
-        if self.y >= pyxel.height:
-            self.scene = SCENE_GAMEOVER
+        
 
     def draw(self):
         u = (2 if self.is_falling else pyxel.frame_count // 3 % 2) * 8
@@ -232,7 +231,7 @@ class Enemy3Bullet:
 class App:
     def __init__(self):
         pyxel.init(128, 128, title="Pyxel Platformer")
-        pyxel.load("kaneshiro2.pyxres")
+        pyxel.load("platformer (1).pyxres")
         self.scene = SCENE_PLAY
         self.score = 0
         self.score2 = 0
@@ -266,6 +265,10 @@ class App:
         self.score2 = self.score
         if self.highscore <= self.score:
             self.highscore = self.score
+            
+        if self.y >= pyxel.height:
+            self.scene = SCENE_GAMEOVER
+            
         for enemy in enemies:
             if abs(player.x - enemy.x) < 6 and abs(player.y - enemy.y) < 6:
                 self.scene = SCENE_GAMEOVER
@@ -351,6 +354,8 @@ class App:
        
 
 def game_over():
+    self.update_gameover_scene()
+    
     global scroll_x, enemies
     scroll_x = 0
     player.x = 0
