@@ -304,7 +304,7 @@ class App:
         
         
        
-   def draw_play_scene(self):
+    def draw_play_scene(self):
     
         # Draw level
         pyxel.camera()
