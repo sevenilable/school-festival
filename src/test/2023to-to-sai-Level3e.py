@@ -127,8 +127,7 @@ class Player:
             last_scroll_x = scroll_x
             scroll_x = min(self.x - SCROLL_BORDER_X, 240 * 8)
             spawn_enemy(last_scroll_x + 128, scroll_x + 127)
-        if self.y >= pyxel.height:
-            self.scene = SCENE_GAMEOVER
+ 
 
     def draw(self):
         u = (2 if self.is_falling else pyxel.frame_count // 3 % 2) * 8
@@ -266,6 +265,10 @@ class App:
         self.score2 = self.score
         if self.highscore <= self.score:
             self.highscore = self.score
+            
+        if player.y >= 128:
+            self.scene = SCENE_GAMEOVER
+            
         for enemy in enemies:
             if abs(player.x - enemy.x) < 6 and abs(player.y - enemy.y) < 6:
                 self.scene = SCENE_GAMEOVER
