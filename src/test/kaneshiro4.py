@@ -266,7 +266,7 @@ class App:
         if self.highscore <= self.score:
             self.highscore = self.score
             
-        if self.y >= pyxel.height:
+        if player.y >= 128:
             self.scene = SCENE_GAMEOVER
             
         for enemy in enemies:
