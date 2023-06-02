@@ -270,7 +270,7 @@ class App:
         cleanup_list(enemies)
         
     def update_title_scene(self):
-        self.scene = SCENE_PLAY
+            self.scene = SCENE_PLAY
         
 
     def update_gameover_scene(self):
