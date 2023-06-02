@@ -317,9 +317,9 @@ class App:
         for enemy in enemies:
             enemy.draw()
             
-  def draw_gameover_scene(self):
-    pyxel.text(35+scrool_x,40,"GAME OVER",7)
-    pyxel.text(30+scrool_x,80,"- PRESS ENTER -",7)
+    def draw_gameover_scene(self):
+        pyxel.text(35+scrool_x,40,"GAME OVER",7)
+        pyxel.text(30+scrool_x,80,"- PRESS ENTER -",7)
        
 
 def game_over():
