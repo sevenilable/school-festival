@@ -257,6 +257,8 @@ class App:
             self.update_gameover_scene()
 
     def update_play_scene(self):
+        
+        player.update()
         self.score = scroll_x
         for enemy in enemies:
             if abs(player.x - enemy.x) < 6 and abs(player.y - enemy.y) < 6:
