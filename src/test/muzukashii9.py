@@ -235,6 +235,7 @@ class App:
         pyxel.load("joukyuu.pyxres")
         self.scene = SCENE_PLAY
         self.score = 0
+        self.highscore = 0
 
         # Change enemy spawn tiles invisible
         pyxel.image(0).rect(0, 8, 24, 8, TRANSPARENT_COLOR)
@@ -260,6 +261,8 @@ class App:
         
         player.update()
         self.score = scroll_x
+        if self.highscore <= self.score:
+            self.highscore = self.score
         for enemy in enemies:
             if abs(player.x - enemy.x) < 6 and abs(player.y - enemy.y) < 6:
                 self.scene = SCENE_GAMEOVER
@@ -300,8 +303,11 @@ class App:
         
         
         s = f"SCORE{self.score:>4}/1920"
+        hs = "HighScore :{:>4}".format(self.highscore)
         pyxel.text(5+scroll_x,4,s,1)
         pyxel.text(4+scroll_x,4,s,7)
+        pyxel.text(5+scroll_x,10,hs,1)
+        pyxel.text(4+scroll_x,10,hs,7)
         
         
        
